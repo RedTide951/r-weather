@@ -1,10 +1,11 @@
-// WeatherInfo.js
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const WeatherInfo = ({ city, children }) => {
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-    const apiKey = "YOUR_API_KEY"; // Replace with your API key
+    const apiKey = "03e06b28765421c4b35786154e2bd519"; // Replace with your API key
     const fetchWeatherData = async () => {
       try {
         const response = await axios.get(
@@ -13,13 +14,16 @@ const WeatherInfo = ({ city, children }) => {
         setWeatherData(response.data);
       } catch (error) {
         console.error("Error fetching weather data:", error);
+        setWeatherData(null); // Reset weather data on error
       }
     };
 
-    fetchWeatherData();
+    if (city) {
+      fetchWeatherData();
+    }
   }, [city]);
-
-  console.log("WeatherData in WeatherInfo:", weatherData); // Add this line
 
   return <>{children(weatherData)}</>;
 };
+
+export default WeatherInfo;

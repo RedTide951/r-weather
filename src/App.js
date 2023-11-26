@@ -18,9 +18,7 @@ function App() {
     <div className="App">
       <SearchAppBar onCityChange={handleCityChange} />
       <SimpleContainer>
-        <WeatherInfo city={city}>
-          {(weatherData) => <WeatherDisplay weatherData={weatherData} />}
-        </WeatherInfo>
+        <WeatherDisplay />
       </SimpleContainer>
     </div>
   );
